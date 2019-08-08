@@ -1,0 +1,35 @@
+pipeline {
+    agent any
+    
+    tools{
+        nodejs "nodejs 12.8.0"
+    }
+    
+    stages {
+        stage('Files in this directory') {
+            steps {
+                sh "ls -ltr"
+            }
+        }
+        stage('Current working directory') {
+            steps {
+                pwd()
+            }
+        }
+        stage("build"){
+            steps {
+                echo "Changind pwd"
+                dir("result"){
+                    sh 'npm install'
+                }
+            }
+        }
+        stage('Packaging') {
+            steps {
+                dir("result"){
+                    sh 'npm test'
+                }
+            }
+        }
+    }
+}
