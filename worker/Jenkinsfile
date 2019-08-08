@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+    
+    tools{
+        maven "maven 3.6.1"
+    }
+    
+    stages {
+        stage("build"){
+            steps {
+                dir("worker"){
+                    sh 'ls -ltr'
+                    sh 'mvn compile'
+                }
+            }
+        }
+        stage("test"){
+            steps {
+                dir("worker"){
+                    sh 'mvn clean test'
+                }
+            }
+        }
+        stage('package') {
+            steps {
+                dir("worker"){
+                   sh 'mvn package -DskipTests'
+                   archiveArtifacts artifacts: '**/target/*.jar'
+                }
+            }
+        }
+    }
+}
