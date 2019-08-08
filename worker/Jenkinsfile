@@ -25,7 +25,7 @@ pipeline {
             steps {
                 dir("worker"){
                    sh 'mvn package -DskipTests'
-                   achiveArtifacts artifacts: '**/target/*.jar'
+                   archiveArtifacts artifacts: '**/target/*.jar'
                 }
             }
         }
