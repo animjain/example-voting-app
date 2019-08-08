@@ -1,0 +1,22 @@
+
+pipeline {
+    agent none
+
+    stages {
+	stage('docker-package'){
+ 		agent any
+ 
+		steps{
+ 			echo 'Packaging worker app with docker'
+ 			script{
+ 				docker.withRegistry('https://index.docker.io/v1/', 'animjain_dockerhub') {
+ 					def workerImage = docker.build("animjain/worker:v${env.BUILD_ID}", "./worker")
+ 					workerImage.push()
+ 					workerImage.push("latest")
+ 				}
+ 			}
+ 		}
+	}
+    }
+}
+
