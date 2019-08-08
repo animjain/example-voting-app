@@ -20,4 +20,5 @@
 
   * [Lab 9: Deploy to Dev with Compose](chapters/devdeploycompose.md)
 
-  * [Lab 10: Adding Automated Tests](chapters/tests.md)  
+  * [Lab 10: Adding Automated Tests](chapters/tests.md) 
+ 
